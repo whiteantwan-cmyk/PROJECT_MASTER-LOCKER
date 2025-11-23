@@ -1,0 +1,25 @@
+name: HTML Validation
+
+on:
+  push:
+    branches:
+      - new-financial-dashboard
+
+jobs:
+  validate-html:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+    - name: Install HTML Validator
+      run: npm install -g html5-validator
+
+    - name: Validate HTML
+      run: html5-validator --file financial-dashboard.html --format html
